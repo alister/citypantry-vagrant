@@ -26,7 +26,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.33.10"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -38,8 +38,12 @@ config.vm.network "private_network", ip: "192.168.33.10"
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
 
-config.vm.synced_folder "./citypantry-3-frontend", "/home/citypantry/project/frontend", type: "nfs"
-config.vm.synced_folder "./citypantry-3-api", "/home/citypantry/project/api", type: "nfs"
+  config.vm.synced_folder "./citypantry-3-frontend", "/home/citypantry/project/frontend",
+    type: "nfs", create: true
+  config.vm.synced_folder "./citypantry-3-api", "/home/citypantry/project/api",
+    type: "nfs", create: true
+  config.vm.synced_folder "./citypantry-2-puppet", "/home/vagrant/puppet",
+    type: "nfs"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -63,11 +67,15 @@ config.vm.synced_folder "./citypantry-3-api", "/home/citypantry/project/api", ty
   #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
   # end
 
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo apt-get update
-  #   sudo apt-get install -y apache2
-  # SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo add-apt-repository ppa:nginx/development
+    sudo apt-get update
+    sudo apt-get install git puppet npm -y
+    sudo npm install -g grunt-cli
+    ln -s /usr/bin/nodejs /usr/bin/node
+    cd /home/vagrant/puppet
+    git checkout vagrant
+    sudo ./papply
+  SHELL
 end
+
