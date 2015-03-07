@@ -74,7 +74,7 @@ Vagrant.configure(2) do |config|
     sudo npm install -g grunt-cli
     ln -s /usr/bin/nodejs /usr/bin/node
     cd /home/vagrant/puppet
-    git checkout vagrant
+    git checkout master
     sudo ./papply
   SHELL
 end
