@@ -71,7 +71,6 @@ Vagrant.configure(2) do |config|
     sudo add-apt-repository ppa:nginx/development
     sudo apt-get update
     sudo apt-get install git puppet npm -y
-    sudo puppet module install saz-timezone --version 3.1.1
     sudo npm install -g grunt-cli
     ln -s /usr/bin/nodejs /usr/bin/node
     cd /home/vagrant/puppet
