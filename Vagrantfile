@@ -68,14 +68,19 @@ Vagrant.configure(2) do |config|
   # end
 
   config.vm.provision "shell", inline: <<-SHELL
-    sudo add-apt-repository ppa:nginx/development
-    sudo apt-get update
-    sudo apt-get install git puppet npm -y
-    sudo npm install -g grunt-cli
+    echo 'Setting up system dependencies.'
+    add-apt-repository ppa:nginx/development
+    apt-get update
+    [ -f /usr/bin/git ] || apt-get install git -y
+    [ -f /usr/bin/puppet ] || apt-get install puppet -y
+    echo 'Setting up Node dependencies that are not yet install via Puppet.'
+    apt-get install npm -y
+    npm install -g grunt-cli
     ln -s /usr/bin/nodejs /usr/bin/node
+    echo 'Starting Puppet.'
     cd /home/vagrant/puppet
     git checkout master
-    sudo ./papply
+    ./papply
+    echo 'Finished.'
   SHELL
 end
-
