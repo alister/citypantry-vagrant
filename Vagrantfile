@@ -81,6 +81,8 @@ Vagrant.configure(2) do |config|
     cd /home/vagrant/puppet
     git checkout master
     ./papply
+    echo 'Stopping Puppet agent because the machine has been provisioned via Puppet apply.'
+    service puppet stop
     echo 'Finished.'
   SHELL
 end
