@@ -49,13 +49,19 @@ Vagrant.configure(2) do |config|
     ./papply
     echo 'Stopping Puppet agent because the machine has been provisioned via Puppet apply.'
     service puppet stop
+    echo 'Fixing permissions.'
+    chown -R citypantry:citypantry /home/citypantry/project
     echo 'Finished.'
   SHELL
 
   config.vm.post_up_message = <<-MESSAGE
     Your City Pantry development VM has been created!
 
-    You can SSH into the VM with `vagrant ssh`, or `ssh USERNAME@192.168.33.10 -p 2223`
+    You can SSH into the VM with `ssh USERNAME@192.168.33.10 -p 2223`
+
+    In your SSH session, to run commands as root, your personal user account should be able to
+    run sudo commands without a password prompt. To run application commands, make sure you run them
+    as the 'citypantry' user (`sudo su - citypantry` to become that user).
 
     If everything else is set up correctly, you can see the website in your browser at:
     http://order.citypantry.dev/
