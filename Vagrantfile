@@ -8,10 +8,23 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", ip: "192.168.33.10"
 
   # Folder shares.
+  # Use NFS for Puppet, because it does not need a specific owner.
+  # Use rsync for the application, because those folders need to be owned by the 'citypantry'
+  # user, and NFS does not support changing the owner of a synced folder.
   config.vm.synced_folder "./citypantry-3-frontend", "/home/citypantry/project/frontend",
-    type: "nfs", create: true
+    type: "rsync",
+    create: true,
+    owner: "citypantry",
+    group: "citypantry",
+    rsync__auto: true,
+    rsync__exclude: ["app/cache/", "app/logs/"]
   config.vm.synced_folder "./citypantry-3-api", "/home/citypantry/project/api",
-    type: "nfs", create: true
+    type: "rsync",
+    create: true,
+    owner: "citypantry",
+    group: "citypantry",
+    rsync__auto: true,
+    rsync__exclude: ["app/cache/", "app/logs/"]
   config.vm.synced_folder "./citypantry-2-puppet", "/home/vagrant/puppet",
     type: "nfs"
 
