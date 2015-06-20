@@ -51,4 +51,15 @@ Vagrant.configure(2) do |config|
     service puppet stop
     echo 'Finished.'
   SHELL
+
+  config.vm.post_up_message = <<-MESSAGE
+    Your City Pantry development VM has been created!
+
+    You can SSH into the VM with `vagrant ssh`, or `ssh USERNAME@192.168.33.10 -p 2223`
+
+    If everything else is set up correctly, you can see the website in your browser at:
+    http://order.citypantry.dev/
+
+    Now start syncing the API and frontend folders: `nohup vagrant rsync-auto &`
+  MESSAGE
 end
