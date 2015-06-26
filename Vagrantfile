@@ -17,14 +17,14 @@ Vagrant.configure(2) do |config|
     owner: "citypantry",
     group: "citypantry",
     rsync__auto: true,
-    rsync__exclude: ["app/cache/", "app/logs/"]
+    rsync__exclude: ["app/cache/", "app/logs/", "vagrant2015*", "d2015*", "node_modules"]
   config.vm.synced_folder "./citypantry-3-api", "/home/citypantry/project/api",
     type: "rsync",
     create: true,
     owner: "citypantry",
     group: "citypantry",
     rsync__auto: true,
-    rsync__exclude: ["app/cache/", "app/logs/"]
+    rsync__exclude: ["app/cache/", "app/logs/", "var", "vagrant2015*", "d2015*"]
   config.vm.synced_folder "./citypantry-2-puppet", "/home/vagrant/puppet",
     type: "nfs"
 
