@@ -32,7 +32,7 @@ Vagrant.configure(2) do |config|
     group: "citypantry",
     rsync__auto: true,
     rsync__exclude: ["vagrant2015*", "d2015*"]
-  config.vm.synced_folder "./citypantry-2-puppet", "/home/vagrant/puppet",
+  config.vm.synced_folder "./citypantry-2-puppet", "/root/puppet",
     type: "nfs"
 
   # Provider-specific configuration.
