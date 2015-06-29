@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
     [ -f /usr/bin/puppet ] || apt-get install puppet -y
     echo 'Setting up Node dependencies that are not yet install via Puppet.'
     apt-get install npm -y
-    npm install -g grunt-cli
+    npm install -g grunt-cli gulp bower cordova
     ln -s /usr/bin/nodejs /usr/bin/node
     echo 'Starting Puppet.'
     cd /home/vagrant/puppet
