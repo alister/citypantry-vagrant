@@ -25,6 +25,13 @@ Vagrant.configure(2) do |config|
     group: "citypantry",
     rsync__auto: true,
     rsync__exclude: ["app/cache/", "app/logs/", "var", "vagrant2015*", "d2015*"]
+  config.vm.synced_folder "./citypantry-mobile", "/home/citypantry/project/mobile",
+    type: "rsync",
+    create: true,
+    owner: "citypantry",
+    group: "citypantry",
+    rsync__auto: true,
+    rsync__exclude: ["vagrant2015*", "d2015*"]
   config.vm.synced_folder "./citypantry-2-puppet", "/home/vagrant/puppet",
     type: "nfs"
 

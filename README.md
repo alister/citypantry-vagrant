@@ -3,6 +3,7 @@ Assuming you have this directory structure:
     ./citypantry-3-api
     ./citypantry-3-frontend
     ./citypantry-2-puppet
+    ./citypantry-mobile
     ./Vagrantfile
 
 First install our dependencies with `git submodule update --init --resursive`.
@@ -12,6 +13,7 @@ Run `vagrant up`. This will provision you a Vagrant box which you can SSH to via
 Add to your `/etc/hosts`:
 
     192.168.33.10  api.citypantry.dev order.citypantry.dev uploads.citypantry.dev
+    192.168.33.10  m.citypantry.dev mobile.citypantry.dev
 
 When your Vagrant box is running, the site will be accessible at `http://order.citypantry.dev/`
 
